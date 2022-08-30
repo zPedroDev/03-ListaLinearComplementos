@@ -9,7 +9,7 @@ void exibirQuantidadeElementos();
 void exibirElementos();
 void inserirElemento();
 void excluirElemento();
-void buscarElemento();
+int buscarElemento();
 int posicaoElemento(int valor);
 //--------------------------
 
@@ -105,7 +105,7 @@ void inserirElemento()
 
 		if (pos != -1)
 		{
-			cout << "Elemento já esta na lista" << endl;
+			cout << "Elemento jÃ¡ esta na lista" << endl;
 		}
 		else
 		{
@@ -122,24 +122,43 @@ void inserirElemento()
 
 void excluirElemento()
 {
+	int valor = buscarElemento();
+	int i = posicaoElemento(valor);
+	
+	if (i != -1) {
+		lista[i] = 0;
+		nElementos--;
 
+		for (int n = 0; n < nElementos; n++)
+		{
+			lista[i] = lista[i + 1];
+			i++;
+			
+		}
+		cout << "Elemento Excluido" << endl;
+
+	}
+	else {
+		cout << "O elemento nao foi encontrado!" << endl;
+	}
 
 }
 
-void buscarElemento()
+int buscarElemento()
 {
 	int valor;
-	cout << "Digite o elemento que queira buscar: ";
+	cout << "Digite o elemento: ";
 	cin >> valor;
 	int pos = posicaoElemento(valor);
 
 	if (pos != -1) {
-		cout << "O elemento foi encontrado na posicao" << pos << endl;
+		cout << "O elemento digitado foi encontrado na posicao: " << pos << endl;
 	}
 	else
 	{
 		cout << "O elemento digitado nao foi encontrado" << endl;
 	}
+	return valor;
 }
 
 int posicaoElemento(int busca)
@@ -152,3 +171,4 @@ int posicaoElemento(int busca)
 	}
 	return posicao;
 }
+
